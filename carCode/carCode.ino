@@ -70,19 +70,22 @@ void handleJSData(){
   //adjust to speed of each each motor depending on the x-axis
   //it slows down one motor and speeds up the other proportionately 
   //based on the amount of turning
-  aSpeed = map(aSpeed + x/2,0,1023, 0, 350);
-  bSpeed = map(bSpeed - x/2,0,1023, 0, 350);
-
+ /* aSpeed = map(aSpeed + x/2,0,1023, 0, 250);
+  bSpeed = map(bSpeed - x/2,0,1023, 0, 250);*/
+  aSpeed = constrain(aSpeed + x/2, 0, 1023);
+  bSpeed = constrain(bSpeed - x/2, 0, 1023);
+aSpeed/=3.0;
+bSpeed /=3.0;
   //use the speed and direction values to turn the motors
   //if either motor is going in reverse from what is expected,
   //just change the 2 digitalWrite lines for both motors:
   //!ydir would become ydir, and ydir would become !ydir
   //digitalWrite(STBY, HIGH);  
-  /*Serial.print("aSpeed=");
+  Serial.print("aSpeed=");
   Serial.println(aSpeed);
   Serial.print("bSpeed=");
-  Serial.println(bSpeed);*/
-
+  Serial.println(bSpeed);
+/*
    digitalWrite(trigPin, LOW);  // Added this line
   delayMicroseconds(2); // Added this line
   digitalWrite(trigPin, HIGH);
@@ -101,7 +104,7 @@ void handleJSData(){
     aSpeed=0;
     bSpeed=0;
   }
-  
+  */
   
   //MotorA
   digitalWrite(AIN1, yDir);
